@@ -1,0 +1,118 @@
+import type { WorldDef } from '../../../game/registry';
+import { catacombBackdrop } from './backdrop';
+import './enemies';
+import { CATACOMBS_MAP } from './map';
+import { catacombStyle } from './tiles';
+
+const PIP_LINES = [
+  "W-WHO'S THERE? OH... YOU'RE GLOWING. YOU'RE A LIGHT!",
+  "I'M PIP. I FOLLOWED A FIREFLY DOWN HERE, AND THEN THE CANDLES WENT OUT, ONE BY ONE.",
+  'SINCE THE BARONS TOOK THE SECTOR LANTERN, THE DARK DOWN THERE HAS TEETH. BATS. CRAWLING SKULLS. AND THE SHADE.',
+  "STRIKE THE OLD BRAZIERS AS YOU GO? THEN THEY'LL BURN FOREVER, AND MAYBE I CAN FOLLOW YOU TO THE LANTERN.",
+];
+
+const world: WorldDef = {
+  id: 'catacombs',
+  name: 'Gloomroot Catacombs',
+  station: 'GLOOMROOT',
+  order: 4,
+  palette: ['#0e0d12', '#3b3349', '#6f8a5a', '#dfe8b0'],
+  tiles: catacombStyle,
+  backdrop: catacombBackdrop,
+  unlocks: 'foundry',
+  dark: true,
+  // Slow A phrygian dirge: i - bII - i - v° with a lonely lead and long rests.
+  music: {
+    bpm: 66,
+    root: 57,
+    scale: [0, 1, 3, 5, 7, 8, 10],
+    bars: [0, 1, 0, 4, 5, 1, 3, 4],
+    melody: [
+      '0.......2...1...',
+      '........4...2...',
+      '0...2...4.....3.',
+      '2.......1.......',
+      '4.......2...0...',
+      '........2.1.....',
+      '0...1...2...4...',
+      '3.......2.....1.',
+    ],
+    lead: 'triangle',
+    bass: 'triangle',
+    sparkle: 0.035,
+  },
+  map: CATACOMBS_MAP,
+  legend: {
+    '!': 'catacombs:glimmers',
+    b: 'catacombs:bat',
+    c: 'catacombs:crawler',
+    s: 'catacombs:shade',
+    q: { kind: 'catacombs:shade', range: 112 },
+    k: 'catacombs:skeleton',
+    Y: { kind: 'catacombs:brazier' },
+    z: { kind: 'catacombs:brazier', group: 'crypt' },
+    Q: { kind: 'catacombs:door', group: 'crypt' },
+    a: { kind: 'catacombs:brazier', group: 'hall' },
+    A: { kind: 'catacombs:door', group: 'hall' },
+    u: { kind: 'catacombs:pod', dir: 'u' },
+    p: { kind: 'catacombs:pod', dir: 'r' },
+    f: 'catacombs:firefly',
+    r: 'catacombs:urn',
+    J: { kind: 'catacombs:glowcap', power: 290 },
+    $: { kind: 'catacombs:glowcap', power: 335 },
+    K: 'catacombs:bonebridge',
+    N: {
+      kind: 'catacombs:npc',
+      sheet: 'catacombs-pip',
+      name: 'PIP',
+      light: 22,
+      bob: true,
+      hideFlag: 'goal:catacombs',
+      lines: PIP_LINES,
+    },
+    Z: {
+      kind: 'catacombs:npc',
+      sheet: 'catacombs-piplit',
+      name: 'PIP',
+      light: 26,
+      bob: true,
+      showFlag: 'goal:catacombs',
+      lines: [
+        'LOOK! THE LANTERN LIT MY WICK AGAIN! I FOLLOWED YOUR BRAZIERS ALL THE WAY DOWN, AND THE DARK JUST... STEPPED ASIDE.',
+        "THE CONDUCTOR SAYS THE FOUNDRY LINE IS OPEN NOW. IT'S HOT AND LOUD THERE. I THINK I'LL STAY RIGHT HERE BY THE LANTERN.",
+      ],
+    },
+    M: {
+      kind: 'catacombs:npc',
+      sheet: 'catacombs-mole',
+      name: 'DIGBY',
+      light: 40,
+      lines: [
+        "MIND THE BILE, SPROUT. NINETY WINTERS I'VE DUG THESE TUNNELS AND IT STILL STINGS.",
+        'THE GREAT HALL AHEAD IS SEALED. THREE BRAZIERS FEED ITS DOOR: ONE LOW, ONE HIGH, ONE EAST. STRIKE EVERY ONE.',
+        "A SHADE HAUNTS THAT HALL. SWAT ITS GHOST ORBS BACK AT IT. THE WISPY THING HATES ITS OWN MEDICINE.",
+        'OH, AND IF YOU HEAR A HOLLOW KNOCK UP IN THE HALL\'S HIGH WEST WALL... WELL. I NEVER DUG THERE.',
+      ],
+      alt: [{ flag: 'goal:catacombs', lines: ['THE LANTERN BURNS AGAIN! EVEN MY OLD EYES CAN SEE THE ROOTS.'] }],
+    },
+    i: { kind: 'decor', sheet: 'catacombs-candles', light: 34, halo: 8 },
+    j: { kind: 'decor', sheet: 'catacombs-skullcandle', light: 26, halo: 6 },
+    h: { kind: 'decor', sheet: 'catacombs-coffin', anim: 'shut', back: true },
+    g: { kind: 'decor', sheet: 'catacombs-coffin', anim: 'ajar', back: true },
+    w: { kind: 'decor', sheet: 'catacombs-niche', back: true, light: 22 },
+    t: { kind: 'decor', sheet: 'catacombs-tombstone', back: true },
+    '-': { kind: 'decor', sheet: 'catacombs-bones' },
+    '@': { kind: 'decor', sheet: 'catacombs-tombgate', back: true },
+    F: { kind: 'decor', sheet: 'catacombs-fungus', light: 30 },
+    R: { kind: 'catacombs:hang', sheet: 'catacombs-roots' },
+    '&': { kind: 'catacombs:hang', sheet: 'catacombs-glowworms', light: 26 },
+    '1': { kind: 'sign', text: ['GLOOMROOT STATION.', 'BELOW HERE THE DARK IS TOTAL. KEEP TO THE LIGHT: CANDLES, LAMPS, FUNGUS.'] },
+    '2': { kind: 'sign', text: ['A COLD BRAZIER. STRIKE IT (X) TO LIGHT IT.', 'A LIT BRAZIER BURNS FOREVER.'] },
+    '3': { kind: 'sign', text: ['A SEALED TOMB. ITS RUNE WAKES WHEN THE BRAZIER THAT FEEDS IT BURNS.', 'LOOK UP.'] },
+    '4': { kind: 'sign', text: ['THE BILE CISTERN.', 'BONE BRIDGES GIVE WAY UNDER YOU. GLOWCAPS BOUNCE YOU HIGH.'] },
+    '5': { kind: 'sign', text: ['THE ROOT CHASM.', 'FIREFLIES FOLLOW KIND SPIRITS. STRIKE A LUMEN POD AND ITS SPORES RISE AND LIGHT THE CLIMB.'] },
+    '6': { kind: 'sign', text: ['THE OLD CRYPT FLOODED LONG AGO.', 'SWIM UNDER THE WALLS. TAP JUMP TO STROKE UP.'] },
+  },
+};
+
+export default world;

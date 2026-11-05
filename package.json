@@ -1,0 +1,21 @@
+{
+  "name": "pixel-worlds",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Prototype 2D pixel action-platformer world (first world of a pixel metaverse).",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "qa": "tsx scripts/qa.ts",
+    "stats": "tsx scripts/stats.ts"
+  },
+  "devDependencies": {
+    "@napi-rs/canvas": "^1.1.0",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.6"
+  }
+}
