@@ -1,5 +1,7 @@
 # Lantern City — a Pixel Worlds prototype
 
+**Frostbell Spire assignment:** start with [the intern handoff guide](FROSTBELL_HANDOFF.md) for setup, the third map's files, improvement priorities, and the pull request workflow.
+
 A 2D pixel-art action platformer inspired by **City of None** (Extremely OK Games): a little
 wooden spirit rides a train between the sectors of a ruined city, relighting each sector's lantern.
 It's also a **prototype for a pixel metaverse**: every world is a plug-in module with its own
